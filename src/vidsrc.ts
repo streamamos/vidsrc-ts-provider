@@ -109,6 +109,7 @@ async function tmdbScrape(tmdbId: string, type: "movie" | "tv", season?: number,
     ? `https://vidsrc.net/embed/${type}?tmdb=${tmdbId}`
     : `https://vidsrc.net/embed/${type}?tmdb=${tmdbId}&season=${season}&episode=${episode}`;
   const embed = await fetch(url);
+  console.log(embed);
   const embedResp = await embed.text();
 
   // get some metadata
