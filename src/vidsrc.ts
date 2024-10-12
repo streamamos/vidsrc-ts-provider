@@ -114,15 +114,19 @@ async function tmdbScrape(tmdbId: string, type: "movie" | "tv", season?: number,
 
   // get some metadata
   const { servers, title } = await serversLoad(embedResp);
+  console.log(servers);
 
   const rcpFetchPromises = servers.map(element => {
     return fetch(`${BASEDOM}/rcp/${element.dataHash}`);
   });
+  console.log(rcpFetchPromises);
   const rcpResponses = await Promise.all(rcpFetchPromises);
+  console.log(rcpResponses);
 
   const prosrcrcp = await Promise.all(rcpResponses.map(async (response) => {
     return rcpGrabber(await response.text());
   }));
+  console.log(prosrcrcp);
 
   const apiResponse: APIResponse[] = [];
   for (const item of prosrcrcp) {
